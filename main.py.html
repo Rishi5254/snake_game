@@ -1,0 +1,79 @@
+<html>
+<head>
+<title>main.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6897bb;}
+.s3 { color: #6a8759;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+main.py</font>
+</center></td></tr></table>
+<pre><span class="s0">from </span><span class="s1">turtle </span><span class="s0">import </span><span class="s1">Screen</span>
+<span class="s0">import </span><span class="s1">time</span>
+<span class="s0">from </span><span class="s1">snake </span><span class="s0">import </span><span class="s1">Snake</span>
+<span class="s0">from </span><span class="s1">food </span><span class="s0">import  </span><span class="s1">Food</span>
+<span class="s0">from </span><span class="s1">score </span><span class="s0">import </span><span class="s1">ScoreBoard</span>
+
+<span class="s1">my_screen = Screen()</span>
+<span class="s1">my_screen.setup(</span><span class="s2">600</span><span class="s0">,</span><span class="s2">600</span><span class="s1">)</span>
+<span class="s1">my_screen.bgcolor(</span><span class="s3">&quot;black&quot;</span><span class="s1">)</span>
+<span class="s1">my_screen.tracer(</span><span class="s2">0</span><span class="s1">)</span>
+
+<span class="s1">my_snake = Snake()</span>
+<span class="s1">food = Food()</span>
+<span class="s1">score = ScoreBoard()</span>
+
+<span class="s1">my_screen.listen()</span>
+<span class="s1">my_screen.onkey(my_snake.moveup</span><span class="s0">, </span><span class="s3">&quot;Up&quot;</span><span class="s1">)</span>
+<span class="s1">my_screen.onkey(my_snake.movedowm</span><span class="s0">, </span><span class="s3">&quot;Down&quot;</span><span class="s1">)</span>
+<span class="s1">my_screen.onkey(my_snake.moveleft</span><span class="s0">, </span><span class="s3">&quot;Left&quot;</span><span class="s1">)</span>
+<span class="s1">my_screen.onkey(my_snake.moveright</span><span class="s0">, </span><span class="s3">&quot;Right&quot;</span><span class="s1">)</span>
+
+
+<span class="s1">is_on = </span><span class="s0">True</span>
+<span class="s0">while </span><span class="s1">is_on:</span>
+    <span class="s1">my_screen.update()</span>
+    <span class="s1">time.sleep(</span><span class="s2">0.1</span><span class="s1">)</span>
+    <span class="s1">my_snake.move()</span>
+    <span class="s0">if </span><span class="s1">my_snake.head.distance(food) &lt; </span><span class="s2">15</span><span class="s1">:</span>
+        <span class="s1">food.refresh_newdot()</span>
+        <span class="s1">score.scorecount()</span>
+        <span class="s1">my_snake.extend()</span>
+
+    <span class="s0">if </span><span class="s1">my_snake.head.xcor() &gt;= </span><span class="s2">300 </span><span class="s0">or </span><span class="s1">my_snake.head.xcor() &lt;= -</span><span class="s2">300 </span><span class="s0">or </span><span class="s1">my_snake.head.ycor() &gt;= </span><span class="s2">300 </span><span class="s0">or </span><span class="s1">my_snake.head.ycor() &lt;= -</span><span class="s2">300</span><span class="s1">:</span>
+        <span class="s1">is_on = </span><span class="s0">False</span>
+        <span class="s1">score.gameover()</span>
+
+
+    <span class="s0">for </span><span class="s1">seg </span><span class="s0">in </span><span class="s1">my_snake.segments[</span><span class="s2">1</span><span class="s1">:]:</span>
+        <span class="s0">if </span><span class="s1">my_snake.head.distance(seg) &lt; </span><span class="s2">10</span><span class="s1">:</span>
+            <span class="s1">is_on = </span><span class="s0">False</span>
+            <span class="s1">score.gameover()</span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="s1">my_screen.exitonclick()</span>
+
+</pre>
+</body>
+</html>
